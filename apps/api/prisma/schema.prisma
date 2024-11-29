@@ -1,0 +1,652 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                                    String             @id @default(uuid())
+  stripeCustomerId                      String?            @unique @map("stripe_customer_id")
+  name                                  String
+  email                                 String             @unique
+  phone                                 String             @unique
+  document                              String?            @unique
+  password                              String?
+  avatarUrl                             String?            @map("avatar_url")
+  emailVerifiedAt                       DateTime?          @map("email_verified_at")
+  // eligibleForFirstMonthFree Boolean           @default(true) @map("eligible_for_first_month_free")
+  eligibleForFirstSubscriptionPromotion Boolean            @default(true) @map("eligible_for_first_subscription_promotion")
+  firstLogin                            Boolean            @default(false)
+  firstLoginToday                       Boolean            @default(false)
+  createdAt                             DateTime           @default(now()) @map("created_at")
+  updatedAt                             DateTime           @updatedAt @map("updated_at")
+  deletedAt                             DateTime?          @map("deleted_at")
+  activitiesHistory                     ActivityHistory[]
+  tokens                                Token[]
+  memberOn                              Member[]
+  ownsOrganizations                     Organization[]
+  // subscriptions                         Subscription
+  subscription                          Subscription?
+  // CreditCard                            CreditCard[]
+  creditCards                           CreditCard[]
+  financialAccounts                     FinancialAccount[]
+  transactions                          Transaction[]
+  categories                            Category[]
+  tags                                  Tag[]
+  recurrencs                            Recurrence[]
+  subcategories                         Subcategory[]
+  installments                          Installment[]
+
+  @@map("users")
+}
+
+enum OrganizationType {
+  PERSONAL
+}
+
+model Organization {
+  id                String             @id @default(uuid())
+  ownerId           String             @map("owner_id")
+  owner             User               @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name              String
+  slug              String             @unique
+  avatarUrl         String?            @map("avatar_url")
+  type              OrganizationType   @default(PERSONAL)
+  members           Member[]
+  createdAt         DateTime           @default(now()) @map("created_at")
+  updatedAt         DateTime           @updatedAt @map("updated_at")
+  deletedAt         DateTime?          @map("deleted_at")
+  // CreditCard CreditCard[]
+  creditCards       CreditCard[]
+  financialAccounts FinancialAccount[]
+  transactions      Transaction[]
+  categories        Category[]
+  tags              Tag[]
+  recurrences       Recurrence[]
+  subcategories     Subcategory[]
+  installments      Installment[]
+
+  @@map("organizations")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+model Member {
+  id             String       @id @default(uuid())
+  userId         String       @map("user_id")
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String       @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           Role         @default(MEMBER)
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@unique([userId, organizationId, role])
+  @@map("members")
+}
+
+// enum SubscriptionStatus {
+//   ACTIVE
+//   SUSPENDED
+//   CANCELLED
+//   PENDING
+//   REFUNDED
+// }
+
+enum SubscriptionType {
+  MONTHLY
+  YEARLY
+}
+
+enum SubscriptionPlan {
+  FREE
+  MONTHLY_PREMIUM
+  YEARLY_PREMIUM
+  FREE_PREMIUM
+}
+
+enum SubscriptionResolvedPlan {
+  FREE
+  PREMIUM
+}
+
+enum SubscriptionOrigin {
+  PURCHASED
+  RESCUED
+}
+
+model Subscription {
+  id                     String                   @id @default(uuid())
+  userId                 String                   @unique @map("user_id")
+  user                   User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan                   SubscriptionPlan
+  resolvedPlan           SubscriptionResolvedPlan @map("resolved_plan")
+  type                   SubscriptionType
+  status                 String
+  // origin                   SubscriptionOrigin
+  startDate              Decimal                  @map("start_date")
+  currentPeriodStart     Decimal                  @map("current_period_start")
+  currentPeriodEnd       Decimal                  @map("current_period_end")
+  endedAt                Decimal?                 @map("ended_at")
+  stripeDiscountCouponId String?                  @map("stripe_discount_coupon_id")
+  stripeSubscriptionId   String                   @unique @map("stripe_subscription_id")
+  stripePriceId          String                   @map("stripe_price_id")
+  stripeProductId        String                   @map("stripe_product_id")
+  stripeDaysUntilDue     Decimal?                 @map("stripe_days_until_due")
+  trialStart             Decimal?                 @map("trial_start")
+  trialEnd               Decimal?                 @map("trial_end")
+  cancelAt               Decimal?                 @map("cancel_at")
+  cancelAtPeriodEnd      Boolean                  @map("cancel_at_period_end")
+  canceledAt             Decimal?                 @map("canceled_at")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  // colocar o id do resgate com mais detalhes
+  // @@unique([userId, status])
+  @@index([stripeSubscriptionId])
+  @@index([stripePriceId])
+  @@index([stripeProductId])
+  @@map("subscriptions")
+}
+
+enum ActivityType {
+  SIGN_IN
+  UNSUCCESSFUL_SIGN_IN_ATTEMPT
+  SIGN_UP
+  VERIFY_EMAIL
+  RESEND_VERIFICATION_EMAIL
+  PASSWORD_RESET
+  FORGOT_PASSWORD
+}
+
+model Device {
+  id                String           @id @default(uuid())
+  ip                String
+  rawUserAgency     String           @map("raw_user_agency")
+  userAgency        String?          @map("user_agency")
+  language          String?
+  mobile            String?
+  phone             String?
+  tablet            String?
+  os                String?
+  activitiesHistory ActivityHistory?
+
+  @@map("devices")
+}
+
+model ActivityHistory {
+  id           String       @id @default(uuid())
+  userId       String       @map("user_id")
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  locationId   String?      @unique @map("location_id")
+  location     Location?    @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  activityType ActivityType @map("activity_type")
+  deviceId     String?      @unique @map("device_id")
+  device       Device?      @relation(fields: [deviceId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("activities_history")
+}
+
+model Location {
+  id        String  @id @default(uuid())
+  ip        String
+  hostname  String
+  city      String
+  region    String
+  country   String
+  postal    String
+  timezone  String
+  latitude  Decimal
+  longitude Decimal
+  org       String
+
+  createdAt  DateTime         @default(now()) @map("created_at")
+  updatedAt  DateTime         @updatedAt @map("updated_at")
+  deletedAt  DateTime?        @map("deleted_at")
+  activities ActivityHistory?
+
+  @@map("locations")
+}
+
+enum TokenType {
+  FORGOT_PASSWORD
+  EMAIL_VERIFY
+}
+
+model Token {
+  id        String    @id @default(uuid())
+  userId    String    @map("user_id")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      TokenType
+  expiresIn Int       @map("expires_in")
+  disabled  Boolean   @default(false)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  // @@index([userId, disabled])
+  @@map("tokens")
+}
+
+enum AccountProvider {
+  GOOGLE
+}
+
+enum CategoryType {
+  REVENUE
+  EXPENSE
+}
+
+model Category {
+  id                           String       @id @default(uuid())
+  userId                       String       @map("user_id")
+  user                         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId               String       @map("organization_id")
+  organization                 Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name                         String
+  description                  String?
+  mainCategory                 Boolean      @default(false) @map("main_category")
+  type                         CategoryType
+  icon                         String
+  color                        String
+  archivedAt                   DateTime?    @map("archived_at")
+  blockedByExpiredSubscription Boolean      @default(false) @map("blocked_by_expired_subscription")
+
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  deletedAt     DateTime?     @map("deleted_at")
+  transactions  Transaction[]
+  recurrences   Recurrence[]
+  subcategories Subcategory[]
+
+  // @@unique([name, organizationId, type])
+  @@index([name])
+  @@map("categories")
+}
+
+model Subcategory {
+  id                           String       @id @default(uuid())
+  categoryId                   String       @map("category_id")
+  category                     Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  userId                       String       @map("user_id")
+  user                         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId               String       @map("organization_id")
+  organization                 Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name                         String
+  description                  String?
+  mainSubcategory              Boolean      @default(false) @map("main_subcategory")
+  type                         CategoryType
+  color                        String
+  archivedAt                   DateTime?    @map("archived_at")
+  blockedByExpiredSubscription Boolean      @default(false) @map("blocked_by_expired_subscription")
+
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  deletedAt    DateTime?     @map("deleted_at")
+  transactions Transaction[]
+  recurrences  Recurrence[]
+
+  // @@unique([name, organizationId, type])
+  @@index([name])
+  @@map("subcategories")
+}
+
+// model UserCategories {}
+// enum TagType {
+//   REVENUE
+//   EXPENSE
+// }
+
+model Tag {
+  id             String       @id @default(uuid())
+  userId         String       @map("user_id")
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String       @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name           String
+  description    String?
+
+  color String
+  // type  TagType
+
+  archivedAt                   DateTime? @map("archived_at")
+  blockedByExpiredSubscription Boolean   @default(false) @map("blocked_by_expired_subscription")
+
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+  deletedAt        DateTime?         @map("deleted_at")
+  transactionsTags TransactionTags[]
+
+  @@unique([name, organizationId])
+  @@index([name])
+  @@map("tags")
+}
+
+// model UserTags {}
+
+enum CreditCardFlag {
+  MCC
+  VCC
+  ECC
+  HCC
+  ACC
+  OUTROS
+}
+
+model CreditCard {
+  id                           String              @id @default(uuid())
+  userId                       String              @map("user_id")
+  user                         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId               String              @map("organization_id")
+  organization                 Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  defaultPaymentAccountId      String              @map("default_payment_account_id")
+  defaultPaymentAccount        FinancialAccount    @relation(fields: [defaultPaymentAccountId], references: [id], onDelete: NoAction)
+  name                         String
+  description                  String?
+  limit                        Decimal             @db.Money
+  color                        String
+  flag                         CreditCardFlag
+  invoiceClosingDate           Int                 @map("invoice_closing_date")
+  invoiceDueDate               Int                 @map("invoice_due_date")
+  blockedByExpiredSubscription Boolean             @default(false) @map("blocked_by_expired_subscription")
+  archivedAt                   DateTime?           @map("archived_at")
+  createdAt                    DateTime            @default(now()) @map("created_at")
+  updatedAt                    DateTime            @updatedAt @map("updated_at")
+  deletedAt                    DateTime?           @map("deleted_at")
+  transactions                 Transaction[]
+  recurrences                  Recurrence[]
+  invoices                     CreditCardInvoice[]
+  installments                 Installment[]
+
+  @@unique([organizationId, name])
+  @@map("credit_cards")
+}
+
+enum InvoiceStatus {
+  OPEN
+  CLOSED
+}
+
+model CreditCardInvoice {
+  id              String        @id @default(uuid())
+  creditCardId    String        @map("credit_card_id")
+  creditCard      CreditCard    @relation(fields: [creditCardId], references: [id], onDelete: Cascade)
+  periodStart     String
+  periodEnd       String
+  dueDate         String
+  month           Int
+  year            Int
+  // status       InvoiceStatus
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+  deletedAt       DateTime?     @map("deleted_at")
+  transactions    Transaction[] @relation("invoiceTransactions")
+  invoicePayments Transaction[] @relation("invoicePayments")
+
+  @@map("credit_cards_invoices")
+}
+
+enum BankAccountType {
+  CC
+  CP
+  CI
+  DINHEIRO
+  OUTROS
+}
+
+enum AccountIntegrationType {
+  MANUAL
+  OPEN_FINANCE
+}
+
+model FinancialAccount {
+  id                              String                 @id @default(uuid())
+  userId                          String                 @map("user_id")
+  user                            User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId                  String                 @map("organization_id")
+  organization                    Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  bankId                          String                 @map("bank-id")
+  bank                            Bank                   @relation(fields: [bankId], references: [id], onDelete: NoAction)
+  accountIntegrationType          AccountIntegrationType @default(MANUAL) @map("integration_type")
+  isWallet                        Boolean                @default(false) @map("is_wallet")
+  initialBalance                  Decimal                @map("initial_balance") @db.Money
+  name                            String
+  description                     String?
+  accountType                     BankAccountType        @default(CC) @map("account_type")
+  color                           String
+  visibledInOverallBalance        Boolean                @default(true)
+  blockedByExpiredSubscription    Boolean                @default(false) @map("blocked_by_expired_subscription")
+  archivedAt                      DateTime?              @map("archived_at")
+  createdAt                       DateTime               @default(now()) @map("created_at")
+  updatedAt                       DateTime               @updatedAt @map("updated_at")
+  deletedAt                       DateTime?              @map("deleted_at")
+  creditCards                     CreditCard[]
+  transactions                    Transaction[]          @relation("transactionsRelation")
+  incomingTransfers               Transaction[]          @relation("destinationFinancialAccountRelation")
+  installments                    Installment[]
+  recurrencesToDestinationAccount Recurrence[]           @relation("recurrenceDestinationFinancialAccountRelation")
+  recurrences                     Recurrence[]           @relation("recurrences")
+
+  @@unique([organizationId, name])
+  // @@unique([id, userId, organizationId])
+  @@map("financial_accounts")
+}
+
+enum TransactionType {
+  REVENUE
+  EXPENSE
+  TRANSFER
+  POSITIVE_ADJUSTMENT
+  NEGATIVE_ADJUSTMENT
+}
+
+enum TransactionStatus {
+  PAID
+  UNPAID
+}
+
+model Transaction {
+  id                            String             @id @default(uuid())
+  userId                        String             @map("user_id")
+  user                          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId                String             @map("organization_id")
+  organization                  Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  creditCardId                  String?            @map("credit_card_id")
+  creditCard                    CreditCard?        @relation(fields: [creditCardId], references: [id], onDelete: Cascade)
+  financialAccountId            String?            @map("financial_account_id")
+  financialAccount              FinancialAccount?  @relation("transactionsRelation", fields: [financialAccountId], references: [id], onDelete: Cascade)
+  destinationFinancialAccountId String?            @map("destination_financial_account_id")
+  destinationFinancialAccount   FinancialAccount?  @relation("destinationFinancialAccountRelation", fields: [destinationFinancialAccountId], references: [id], onDelete: Cascade)
+  categoryId                    String?            @map("category_id")
+  category                      Category?          @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  subcategoryId                 String?            @map("subcategory_id")
+  subcategory                   Subcategory?       @relation(fields: [subcategoryId], references: [id], onDelete: SetNull)
+  recurrenceId                  String?            @map("recurrence_id")
+  recurrence                    Recurrence?        @relation(fields: [recurrenceId], references: [id], onDelete: Cascade)
+  creditCardInvoiceId           String?            @map("credit_card_invoice_id")
+  creditCardInvoice             CreditCardInvoice? @relation("invoiceTransactions", fields: [creditCardInvoiceId], references: [id], onDelete: Cascade)
+  creditCardInvoicePaymentId    String?            @map("credit_card_invoice_payment_id")
+  creditCardInvoicePayment      CreditCardInvoice? @relation("invoicePayments", fields: [creditCardInvoicePaymentId], references: [id], onDelete: Cascade)
+  installmentId                 String?            @map("installment_id")
+  installment                   Installment?       @relation(fields: [installmentId], references: [id], onDelete: Cascade)
+  amount                        Decimal            @db.Money
+  currency                      String?            @default("BRL")
+  description                   String
+  observation                   String?
+  type                          TransactionType
+  status                        TransactionStatus // paga // nao paga
+  realizationDate               String             @map("realization_date") // 2024-08-22
+  paidAt                        DateTime?          @map("paid_at")
+  degreeOfNeed                  Int?               @map("degree_of_need")
+  skip                          Boolean            @default(false)
+  futureTransaction             Boolean            @default(false)
+  installmentNumber             Int?               @map("installment_number")
+
+  // installment_transaction_parent_id
+  // installment_id
+  transactionsTags TransactionTags[]
+  createdAt        DateTime            @default(now()) @map("created_at")
+  updatedAt        DateTime            @updatedAt @map("updated_at")
+  deletedAt        DateTime?           @map("deleted_at")
+  splitedWith      FriendTransaction[]
+
+  @@map("transactions")
+}
+
+model TransactionTags {
+  id            String       @id @default(uuid())
+  transactionId String?      @map("transaction_id")
+  transaction   Transaction? @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  recurrenceId  String?      @map("recurrence_id")
+  recurrence    Recurrence?  @relation(fields: [recurrenceId], references: [id], onDelete: Cascade)
+  tagId         String       @map("tag_id")
+  tag           Tag          @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+  deletedAt     DateTime?    @map("deleted_at")
+
+  @@map("transaction_tags")
+}
+
+model Installment {
+  id                        String            @id @default(uuid())
+  userId                    String            @map("user_id")
+  user                      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId            String            @map("organization_id")
+  organization              Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  creditCardId              String?           @map("credit_card_id")
+  creditCard                CreditCard?       @relation(fields: [creditCardId], references: [id], onDelete: Cascade)
+  financialAccountId        String?           @map("financial_account_id")
+  financialAccount          FinancialAccount? @relation(fields: [financialAccountId], references: [id], onDelete: Cascade)
+  totalNumberOfInstallments Int               @map("total_number_of_installments")
+  firstInstallmentDate      String
+
+  transactions Transaction[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("installments")
+}
+
+enum RecurrenceFrequency {
+  anual
+  semestral
+  trimestral
+  bimestral
+  mensal
+  quinzenal
+  semanal
+  diario
+}
+
+model Recurrence {
+  id                            String            @id @default(uuid())
+  userId                        String            @map("user_id")
+  user                          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId                String            @map("organization_id")
+  organization                  Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  creditCardId                  String?           @map("credit_card_id")
+  creditCard                    CreditCard?       @relation(fields: [creditCardId], references: [id], onDelete: Cascade)
+  financialAccountId            String?           @map("financial_account_id")
+  financialAccount              FinancialAccount? @relation("recurrences", fields: [financialAccountId], references: [id], onDelete: Cascade)
+  destinationFinancialAccountId String?           @map("destination_financial_account_id")
+  destinationFinancialAccount   FinancialAccount? @relation("recurrenceDestinationFinancialAccountRelation", fields: [destinationFinancialAccountId], references: [id], onDelete: Cascade)
+  categoryId                    String?           @map("category_id")
+  category                      Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  subcategoryId                 String?           @map("subcategory_id")
+  subcategory                   Subcategory?      @relation(fields: [subcategoryId], references: [id], onDelete: SetNull)
+  // 
+  amount                        Decimal           @db.Money
+  currency                      String?           @default("BRL")
+  description                   String
+  observation                   String?
+  type                          TransactionType
+  realizationDate               String            @map("realization_date") // 2024-08-22
+  degreeOfNeed                  Int?              @map("degree_of_need")
+  skip                          Boolean           @default(false)
+
+  frequency           RecurrenceFrequency
+  nextDate            String
+  lastRealizationDate String
+  startDate           String
+  endDate             String?
+  lastProcessingDate  String
+  day                 Int
+  isActive            Boolean             @default(true) @map("is_active")
+
+  // disabled  Boolean   @default(false)
+  createdAt    DateTime          @default(now()) @map("created_at")
+  updatedAt    DateTime          @updatedAt @map("updated_at")
+  deletedAt    DateTime?         @map("deleted_at")
+  transactions Transaction[]
+  tags         TransactionTags[]
+
+  @@map("recurrences")
+}
+
+model FriendContact {
+  id    String @id @default(uuid())
+  name  String
+  email String
+  phone String
+
+  createdAt                   DateTime            @default(now()) @map("created_at")
+  updatedAt                   DateTime            @updatedAt @map("updated_at")
+  deletedAt                   DateTime?           @map("deleted_at")
+  participationInTransactions FriendTransaction[]
+
+  @@map("friend_contact")
+}
+
+model FriendTransaction {
+  id              String        @id @default(uuid())
+  friendContactId String        @map("friend_contact_id")
+  friendContact   FriendContact @relation(fields: [friendContactId], references: [id])
+  transactionId   String        @map("transaction_id")
+  transaction     Transaction   @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  value           Decimal       @db.Money
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("friend_transaction")
+}
+
+model Bank {
+  id                     String             @id @default(uuid())
+  imageUrl               String             @map("image_url")
+  name                   String             @unique
+  main                   Boolean            @default(false)
+  compe                  String?            @unique
+  ispb                   String?            @unique
+  openFinanceIntegration Boolean            @default(false) @map("open_finance_integration")
+  createdAt              DateTime           @default(now()) @map("created_at")
+  updatedAt              DateTime           @updatedAt @map("updated_at")
+  deletedAt              DateTime?          @map("deleted_at")
+  financialAccounts      FinancialAccount[]
+
+  @@map("banks")
+}

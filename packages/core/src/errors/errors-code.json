@@ -1,0 +1,173 @@
+{
+    "pt-br": {
+        "notFound": {
+            "user": {
+                "message": "Usuário não encontrado."
+            },
+            "user-subscription": {
+                "message": "Assinatura do usuário não encontrada."
+            },
+            "subscription-plan": {
+                "message": "Plano de assinatura não encontrado."
+            },
+            "financial-account": {
+                "message": "Conta não encontrada."
+            },
+            "transaction": {
+                "message": "Transação não encontrada."
+            },
+              "bank": {
+                "message": "Banco não encontrado."
+            },
+            "credit-card": {
+               "message": "Cartão de crédito não encontrado."
+            },
+            "invoice": {
+               "message": "Fatura não encontrada."
+            }
+        },
+        "user": {
+            "unable-to-create-account": {
+                "message": "Não foi possível criar sua conta, por favor, tente novamente mais tarde."
+            },
+            "user-with-same-email-already-exists": {
+                "message": "Já existe um usuário cadastrado com esse e-mail."
+            },
+            "user-with-same-document-already-exists": {
+                "message": "Já existe um usuário cadastrado com esse documento."
+            },
+            "user-with-same-phone-already-exists": {
+                "message": "Já existe um usuário cadastrado com esse telefone."
+            },
+            "wrong-credentials": {
+                "message": "Credenciais incorretas."
+            },
+            "user-without-password": {
+                "message": "Entre em sua conta usando o login social."
+            },
+            "subscription": {
+                "unable-to-upgrade-to-the-same-plan": {
+                    "message": "Não é possível atualizar para o mesmo plano."
+                },
+                "unable-to-upgrade-to-the-free-plan": {
+                    "message": "Não é possível atualizar para o plano gratuito."
+                },
+                "user-already-has-the-premium-plan": {
+                    "message": "O usuário já possui o plano premium."
+                }
+            }
+        },
+        "password-reset": {
+            "invalid-code": {
+                "message": "Código de recuperação inválido."
+            },
+            "disabled": {
+                "message": "Código de recuperação desabilitado."
+            },
+            "expired": {
+                "message": "Código de recuperação expirado."
+            }
+        },
+        "financial-account": {
+            "an-account-with-this-name-already-exists": {
+                "message": "Já existe uma conta com este nome."
+            },
+            "account-limit-already-reached-on-your-current-plan": {
+                "message": "Limite de contas já atingido no seu plano atual."
+            },
+            "account-already-archive": {
+                "message": "A conta já está arquivada."
+            },
+            "account-already-unarchive": {
+                "message": "A conta já está desarquivada."
+            },
+            "blocked-by-expired-subscription": {
+                "message": "Essa conta foi desativada temporariamente porque a assinatura não foi renovada."
+            },
+            "invalid-adjustment-balance": {
+                "message": "O saldo de ajuste não pode ser igual ao seu saldo atual."
+            }
+        },
+        "credit-card": {
+            "an-credit-card-with-this-name-already-exists": {
+                "message": "Já existe um cartão de crédito com este nome."
+            },
+            "credit-cards-limit-already-reached-on-your-current-plan": {
+                "message": "Limite de cartões de crédito já atingido no seu plano atual."
+            },
+            "blocked-by-expired-subscription": {
+                "message": "Esse cartão de crédito foi desativado temporariamente porque a assinatura não foi renovada."
+            },
+            "credit-card-already-archive": {
+                "message": "O cartão de crédito já está arquivado."
+            },
+            "credit-card-already-unarchive": {
+                "message": "O cartão de crédito já está desarquivado."
+            },
+            "it-is-not-possible-to-create-a-card-with-the-wallet-account": {
+                "message": "não é possivel criar cartão com a conta da carteira."
+            }
+        },
+        "transactions": {
+            "daily-transaction-limit-reached": {
+                "message": "Limite de transações do dia atingido."
+            },
+            "daily-transfers-limit-reached": {
+                "message": "Limite de transferência do dia atingido."
+            },
+            "transaction-already-paid": {
+                "message": "Essa transação já foi marcada como paga ou recebida."
+            },
+            "transaction-already-unpaid": {
+                "message": "Essa transação ainda não foi paga."
+            },
+            "invalid-degree-of-need": {
+                "message": "Grau de necessidade inválido."
+            },
+            "transaction-amount-does-not-match-the-chosen-type": {
+                "message": "Valor da transação não corresponde com o tipo escolhido."
+            }
+        },
+        "invoice": {
+            "payment-amount-greater-than-invoice-amount": {
+                "message": "Valor do pagamento maior que o valor da fatura."
+            }
+        },
+        "tags": {
+            "a-tag-with-that-name-already-exists": {
+                "message": "Já existe uma tag com este nome."
+            }
+        },
+        "unathorized": {
+            "invalid-auth-token": {
+                "message": "Token de autenticação inválido."
+            },
+            "not-member-of-this-organization": {
+                "message": "Você não é um membro dessa organização."
+            }
+        },
+        "stripe": {
+            "error-when-trying-to-open-the-billing-portal": {
+                "message": "Não foi possível abrir o portal de faturamento, por favor, tente novamente mais tarde."
+            },
+            "error-while-trying-to-update-subscription": {
+                "message": "Não foi possível atualizar a assinatura nesse momento, por favor, tente novamente mais tarde."
+            }
+        }
+    },
+    "en": {
+        "notFound": {
+            "user": {
+                "message": "User not found."
+            }
+        },
+        "user": {
+            "user-with-same-email-already-exists": {
+                "message": "A user with the same email already exists."
+            },
+            "wrong-credentials": {
+                "message": "Incorrect credentials."
+            }
+        }
+    }
+}

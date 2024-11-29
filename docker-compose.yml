@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  invezto-pg:
+    image: bitnami/postgresql:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=invezto 

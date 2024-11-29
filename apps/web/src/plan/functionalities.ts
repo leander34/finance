@@ -1,0 +1,73 @@
+export const functionalities = [
+  {
+    name: 'Limite de transações',
+    type: 'text',
+    free: '10 por dia',
+    premiumMensal: 'ilimitadas',
+    premiumAnual: 'ilimitadas',
+    info: 'Quantidade de contas que você pode cadastrar.',
+  },
+  {
+    name: 'Conta bancária',
+    type: 'text',
+    free: 1,
+    premiumMensal: 'ilimitadas',
+    premiumAnual: 'ilimitadas',
+    info: 'Quantidade de contas que você pode cadastrar.',
+  },
+  {
+    name: 'Cartão de credito',
+    type: 'text',
+    free: 1,
+    premiumMensal: 'ilimitados',
+    premiumAnual: 'ilimitados',
+    info: 'Quantidade de cartões que você pode cadastrar.',
+  },
+  {
+    name: 'Rede de amigos',
+    type: 'icon',
+    free: false,
+    premiumMensal: true,
+    premiumAnual: true,
+    info: 'Quantidade de contas que você pode cadastrar.',
+  },
+  {
+    name: 'Inteligência artificial',
+    type: 'icon',
+    free: false,
+    premiumMensal: true,
+    premiumAnual: true,
+    info: 'Quantidade de contas que você pode cadastrar.',
+  },
+  {
+    name: 'Relatórios complexos de receita e despesas',
+    type: 'icon',
+    free: false,
+    premiumMensal: true,
+    premiumAnual: true,
+    info: 'Quantidade de contas que você pode cadastrar.',
+  },
+  {
+    name: 'Open finance',
+    type: 'icon',
+    free: false,
+    premiumMensal: true,
+    premiumAnual: true,
+    info: 'Conectar sua conta via open finance para automatizar seus lançamentos.',
+  },
+] as const
+
+const a = {
+  FREE: {
+    transactionLimitPerDay: 10,
+    limiteCredtCard: 1,
+    limitebankAccounts: 1,
+    enabledOpenFinance: false,
+    canDoFinancialPlanning: false,
+    canCreateFinancialGoals: false,
+    canUpsertCategories: false,
+    canCreateTags: false,
+    enabledNetworkFriends: false,
+  },
+  PREMIUM: {},
+}

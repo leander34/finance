@@ -1,0 +1,5 @@
+export * from './bank-account'
+export * from './document'
+export * from './phone'
+export * from './zipcode'
+export * from './money'
