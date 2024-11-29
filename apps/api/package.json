@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "pnpm env:load tsx watch src/infra/http/server.ts",
     "build": "tsup",
-    "start": "node dist/infra/http/server.js",
+    "start": "pnpm prisma migrate deploy -- pnpm prisma generate -- node dist/infra/http/server.js",
     "prisma:generate": "pnpm env:load pnpm prisma generate",
     "prisma:migrate": "pnpm env:load prisma migrate dev",
     "prisma:migrate:reset": "pnpm env:load prisma migrate reset",
