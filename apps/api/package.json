@@ -5,8 +5,8 @@
   "author": "",
   "scripts": {
     "dev": "pnpm env:load tsx watch src/infra/http/server.ts",
-    "build": "tsup -- && npm run sentry:sourcemaps",
-    "start": "",
+    "build": "tsup",
+    "start": "node dist/infra/http/server.js",
     "prisma:generate": "pnpm env:load pnpm prisma generate",
     "prisma:migrate": "pnpm env:load prisma migrate dev",
     "prisma:migrate:reset": "pnpm env:load prisma migrate reset",
@@ -60,7 +60,8 @@
     "@types/node": "^20.14.10",
     "@types/uuid": "^10.0.0",
     "dotenv-cli": "^7.4.2",
-    "prisma": "^5.16.2"
+    "prisma": "^5.16.2",
+    "tsup": "^8.3.5"
   },
   "prettier": "@saas/prettier",
   "eslintConfig": {

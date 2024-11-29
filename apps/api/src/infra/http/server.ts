@@ -10,4 +10,4 @@ app
   .listen({
     port: 3333,
   })
-  .then(() => console.log(`HTTP server is running at PORT: ${env.SERVER_PORT}`))
+  .then(() => console.log(`HTTP server is running at PORT: ${env.PORT}`))

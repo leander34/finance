@@ -2,7 +2,7 @@ import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 export const env = createEnv({
   server: {
-    SERVER_PORT: z.coerce.number().default(3333),
+    PORT: z.coerce.number().default(3333),
     IPINFO_ACCESS_TOKEN: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().min(1),
     STRIPE_PUBLISHABLE_KEY: z.string().min(1),
@@ -21,7 +21,7 @@ export const env = createEnv({
     JWT_SECRET: z.string().min(20),
   },
   runtimeEnv: {
-    SERVER_PORT: process.env.SERVER_PORT,
+    PORT: process.env.PORT,
     IPINFO_ACCESS_TOKEN: process.env.IPINFO_ACCESS_TOKEN,
     JWT_SECRET: process.env.JWT_SECRET,
     NODE_ENV: process.env.NODE_ENV,
