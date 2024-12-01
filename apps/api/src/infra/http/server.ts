@@ -5,6 +5,9 @@ import '../../application/schedules/future-transactions'
 import { env } from '@saas/env'
 
 import { app } from './app'
+// const envFile = `.env.${process.env.NODE_ENV || 'production'}`
+// dotenv.config({ path: envFile })
+// console.log(env.NODE_ENV)
 
 app
   .listen({
