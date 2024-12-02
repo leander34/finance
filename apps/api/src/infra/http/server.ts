@@ -12,7 +12,7 @@ console.log(env)
 
 app
   .listen({
-    port: 3333,
+    port: env.PORT,
     host: '0.0.0.0',
   })
   .then(() => console.log(`HTTP server is running at PORT: ${env.PORT}`))
