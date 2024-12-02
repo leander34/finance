@@ -12,6 +12,7 @@
     "prisma:migrate:reset": "pnpm env:load prisma migrate reset",
     "prisma:studio": "pnpm env:load prisma studio",
     "prisma:seed": "pnpm env:load prisma db seed",
+    "prod:prisma:seed": "pnpm prisma db seed",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
