@@ -45,7 +45,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H <18.233.168.181> >> ~/.ssh/known_hosts
+        ssh-keyscan -H 18.233.168.181 >> ~/.ssh/known_hosts
 
     # 5. Conectar ao servidor e fazer o deploy
     - name: Deploy to EC2
