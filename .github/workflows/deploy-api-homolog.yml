@@ -52,6 +52,6 @@ jobs:
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         EC2_HOST: ${{ secrets.EC2_HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
+        USERNAME: ${{ secrets.EC2_USER }}
       run: |
         ssh -i ~/.ssh/id_rsa $USERNAME@$EC2_HOST
