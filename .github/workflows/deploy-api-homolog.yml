@@ -22,11 +22,17 @@ jobs:
       with:
         node-version: 20 # Ajuste para sua versão do Node.js
 
+    # 3. Instalar pnpm
+    - name: Install pnpm
+      run: corepack enable && corepack prepare pnpm@latest --activate
+
+    - name: Verify pnpm installation
+      run: pnpm --version
 
     # 3. Instalar dependências do backend
     - name: Install dependencies
       working-directory: ./apps/api/
-      run: npm ci
+      run: pnpm i --frozen-lockfile
 
     # 4. Fazer build (se necessário)
     - name: Build Backend
