@@ -25,7 +25,10 @@ jobs:
 
     # 3. Instalar pnpm
     - name: Install pnpm
-      run: npm install -g pnpm   
+      run: corepack enable && corepack prepare pnpm@latest --activate
+
+    - name: Verify pnpm installation
+      run: pnpm --version
 
     # 3. Instalar dependências do backend
     - name: Install dependencies
