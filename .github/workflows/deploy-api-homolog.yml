@@ -58,8 +58,8 @@ jobs:
           cd projects/api-homolog/ &&
           git pull origin development &&
           cd apps/api/ &&
-          pnpm i &&
-          npm run build &&
+          pnpm i --frozen-lockfile &&
+          pnpm run build &&
           npm run prisma:deploy &&
           pm2 reload api-homolog
         "
