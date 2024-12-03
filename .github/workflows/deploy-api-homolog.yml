@@ -54,4 +54,4 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         USERNAME: ${{ secrets.EC2_USER }}
       run: |
-        ssh -i ~/.ssh/id_rsa $USERNAME@$EC2_HOST
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USERNAME@$EC2_HOST

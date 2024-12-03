@@ -18,7 +18,7 @@ export async function teste(app: FastifyInstance) {
     },
     async (request, reply) => {
       return reply.status(200).send({
-        message: 'Olá, Leander dddd do cao 2 gsgsgsjfjfjfgs! gsgsgdadad',
+        message: 'Olá, Leander dddd do cdadadaao 2 gsgsgsjfjfjfgs! gsgsgdadad',
       })
     },
   )
