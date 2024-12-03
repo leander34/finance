@@ -25,6 +25,7 @@ import { financialAccountsRoutes } from './routes/financial-account/routes'
 import { organizationsRoutes } from './routes/organizations/routes'
 import { stripeRoutes } from './routes/stripe/routes'
 import { tagsRoutes } from './routes/tags/routes'
+import { testeRoutes } from './routes/teste/routes'
 import { transactionsRoutes } from './routes/transactions/routes'
 import { userRoutes } from './routes/user/routes'
 import { whatsappRoutes } from './routes/whatsapp/routes'
@@ -99,6 +100,7 @@ export class App {
     this._app.register(stripeRoutes)
     this._app.register(banksRoutes)
     this._app.register(whatsappRoutes)
+    this._app.register(testeRoutes)
   }
 
   // webhooks() {
