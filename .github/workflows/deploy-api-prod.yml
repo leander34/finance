@@ -1,0 +1,65 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/api/**'
+      - 'packages/**'
+      - 'config/**'
+jobs:
+  deploy-backend:
+    name: Deploy Backend Prod
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout do repositório
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 2. Configurar Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20 # Ajuste para sua versão do Node.js
+
+    # 3. Instalar pnpm
+    - name: Install pnpm
+      run: corepack enable && corepack prepare pnpm@latest --activate
+
+    - name: Verify pnpm installation
+      run: pnpm --version
+
+    # 3. Instalar dependências do backend
+    - name: Install dependencies
+      working-directory: ./apps/api/
+      run: pnpm i --frozen-lockfile
+
+    # 4. Fazer build (se necessário)
+    - name: Build Backend
+      working-directory: ./apps/api/
+      run: npm run build # Use o comando adequado ao seu projeto
+
+
+    - name: Configurar chave SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H 18.233.168.181 >> ~/.ssh/known_hosts
+
+    # 5. Conectar ao servidor e fazer o deploy
+    - name: Deploy to EC2
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+        USERNAME: ${{ secrets.EC2_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USERNAME@$EC2_HOST "
+          cd projects/api-prod/ &&
+          git pull origin main &&
+          cd apps/api/ &&
+          pnpm i --frozen-lockfile &&
+          pnpm run build &&
+          pnpm run prisma:deploy &&
+          pm2 reload api-prod
+        "
