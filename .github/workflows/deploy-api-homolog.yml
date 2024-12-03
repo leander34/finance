@@ -58,7 +58,7 @@ jobs:
           cd /projects/api-homolog/ &&
           git pull origin development &&
           cd apps/api/ &&
-          npm ci &&
+          npm i &&
           npm run build &&
           npm run prisma:deploy &&
           pm2 reload api-homolog
