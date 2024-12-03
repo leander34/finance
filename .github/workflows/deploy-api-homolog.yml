@@ -21,12 +21,16 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 20 # Ajuste para sua versão do Node.js
-        cache: 'npm'
+        cache: 'pnpm'
+
+    # 3. Instalar pnpm
+    - name: Install pnpm
+      run: npm install -g pnpm   
 
     # 3. Instalar dependências do backend
     - name: Install dependencies
       working-directory: ./apps/api/
-      run: npm i
+      run: pnpm i --frozen-lockfile
 
     # 4. Fazer build (se necessário)
     - name: Build Backend
