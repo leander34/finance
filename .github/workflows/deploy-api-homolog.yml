@@ -60,5 +60,6 @@ jobs:
           cd apps/api/ &&
           npm ci &&
           npm run build &&
+          npm run prisma:deploy &&
           pm2 reload api-homolog
         "

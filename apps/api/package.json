@@ -5,8 +5,9 @@
   "author": "",
   "scripts": {
     "dev": "pnpm env:load tsx watch src/infra/http/server.ts",
-    "build": "tsup && pnpm prisma migrate deploy",
+    "build": "tsup",
     "start": "pnpm prisma generate && node dist/infra/http/server.js",
+    "prisma:deploy": "pnpm prisma migrate deploy",
     "prisma:generate": "pnpm env:load pnpm prisma generate",
     "prisma:migrate": "pnpm env:load prisma migrate dev",
     "prisma:migrate:reset": "pnpm env:load prisma migrate reset",
