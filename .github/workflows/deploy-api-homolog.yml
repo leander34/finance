@@ -60,6 +60,6 @@ jobs:
           cd apps/api/ &&
           pnpm i --frozen-lockfile &&
           pnpm run build &&
-          npm run prisma:deploy &&
+          pnpm run prisma:deploy &&
           pm2 reload api-homolog
         "
