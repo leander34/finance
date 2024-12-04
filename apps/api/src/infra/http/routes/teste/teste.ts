@@ -18,7 +18,7 @@ export async function teste(app: FastifyInstance) {
     },
     async (request, reply) => {
       return reply.status(200).send({
-        message: 'Olá, Leander eai bb te amo',
+        message: 'Olá, Depois dos bugs do git 2',
       })
     },
   )

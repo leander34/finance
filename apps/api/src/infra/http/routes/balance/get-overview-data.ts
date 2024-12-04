@@ -69,7 +69,6 @@ export async function getOverviewData(app: FastifyInstance) {
         const creditCardService = new CreditCardService()
         await request.getCurrentUserId()
         const { slug } = request.params
-        console.log('aquiidaid--------')
         const { organization } = await request.getUserMembership(slug)
         const { month, year, visibledInOverallBalance } = request.body
         const organizationId = organization.id
