@@ -43,7 +43,6 @@ import { getRevenueCategoriesHttp } from '@/http/categories/get-revenue-categori
 import { getAccountsAndCreditCardsHttp } from '@/http/get-accounts-and-credit-cards-http'
 import { createTagHttp } from '@/http/tags/create-tag'
 import { getAllTagsHttp } from '@/http/tags/get-all-tags'
-import { getRevenueTagsHttp } from '@/http/tags/get-revenue-tags'
 import {
   createTransactionHttp,
   type CreateTransactionRequest,
@@ -80,15 +79,6 @@ import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
 import { Textarea } from '../ui/textarea'
 import { useNewTransaction } from './hook'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPortal,
-  DialogTitle,
-} from './transaction-dialog'
 
 const newRevenueFormSchema = z
   .object({
@@ -210,7 +200,7 @@ export function NewRevenue() {
       realizationDate: dayjs().toDate(),
     },
   })
-  const [showModal, setShowModal] = useState(false)
+  const [, setShowModal] = useState(false)
   const [inputTags, setInputTags] = useState('')
   const {
     control,

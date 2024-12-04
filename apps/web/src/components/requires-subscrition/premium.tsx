@@ -1,12 +1,9 @@
 'use client'
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { fakeDelay } from '@saas/core'
-import { useQuery } from '@tanstack/react-query'
 import { X } from 'lucide-react'
 import type { ComponentType, FC, ReactNode } from 'react'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { getUserProfileHttp } from '@/http/auth/user/get-user-profile-http'
 import { useAuth } from '@/providers/auth-provider'
 
 import { useModalPlans } from '../modal-plans'
@@ -19,8 +16,7 @@ export const premiumComponents = <P extends PremiumComponentsProps>(
   WrappedComponent: ComponentType<P>,
 ) => {
   const component: FC<P> = ({ componentAction, ...props }) => {
-    const { handleToggleModalPlans, showAlert, changeShowAlert } =
-      useModalPlans()
+    const { handleToggleModalPlans, changeShowAlert } = useModalPlans()
     const { user, isAuthPending } = useAuth()
     // const { data, isLoading: isAuthPending } = useQuery({
     //   queryKey: ['user-profile'],

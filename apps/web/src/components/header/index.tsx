@@ -2,7 +2,6 @@ import { UserButton } from '../auth/user-button'
 import { ToggleTheme } from '../global/toggle-theme'
 import { NewTransactionButton } from '../new-transaction/button'
 import { Separator } from '../ui/separator'
-import { BreadcrumpHeader } from './breadcrumb'
 import { SearchButton } from './search-button'
 // import { OrganizationSwitcher } from './organization-switcher'
 export function Header() {

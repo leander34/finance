@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { dayjs, fakeDelay, moneyFormatter } from '@saas/core'
+import { dayjs, moneyFormatter } from '@saas/core'
 import { useQuery } from '@tanstack/react-query'
 import { HTTPError } from 'ky'
 import {
@@ -9,7 +9,6 @@ import {
   ArrowRightLeft,
   ArrowUp,
   CalendarIcon,
-  CheckCheck,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -48,7 +47,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog'
 import {
   Form,

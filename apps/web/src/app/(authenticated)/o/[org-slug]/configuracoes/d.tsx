@@ -1,15 +1,9 @@
 'use client'
 import { CircleUserRound, type LucideIcon, Ticket } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import {
-  type ComponentProps,
-  type ComponentType,
-  type ReactNode,
-  useMemo,
-} from 'react'
+import { type ComponentProps, type ReactNode, useMemo } from 'react'
 
 import { LinkWithSlug } from '@/components/global/link-with-slug'
-import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface LayoutConfiguracaoProps {
@@ -51,7 +45,6 @@ function MenuItem({ icon: Icon, href, children, ...props }: MenuItemProps) {
   const isActive = useMemo(() => {
     return pathname.includes(href.toString())
   }, [pathname, href])
-  const variant = isActive ? 'default' : 'ghost'
   return (
     <LinkWithSlug
       {...props}

@@ -1,7 +1,7 @@
 'use client'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { dayjs } from '@saas/core'
-import { ArrowDown, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {

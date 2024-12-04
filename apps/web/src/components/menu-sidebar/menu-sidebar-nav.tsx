@@ -5,28 +5,21 @@ import {
   ArrowRightLeft,
   Bolt,
   Bookmark,
-  Cable,
   Calculator,
   CalendarDays,
   CircleUserRound,
   Component,
   CreditCard,
   Landmark,
-  Layers,
   LayoutDashboard,
   ListCollapse,
   MessageCircleQuestion,
   NotebookPen,
-  PackageOpen,
   Split,
-  SquarePlus,
   Tags,
   Target,
   Ticket,
-  Unplug,
   Users,
-  WalletCards,
-  Workflow,
 } from 'lucide-react'
 
 import {
@@ -34,7 +27,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { cn } from '@/lib/utils'
 
 import { useModalPlans } from '../modal-plans'
 import { Badge } from '../ui/badge'

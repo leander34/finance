@@ -1,10 +1,9 @@
 'use client'
 
-import { dayjs, fakeDelay, moneyFormatter } from '@saas/core'
+import { dayjs, moneyFormatter } from '@saas/core'
 import { useQuery } from '@tanstack/react-query'
 import {
   CirclePlus,
-  EllipsisVertical,
   HandCoins,
   HelpCircle,
   Loader2,
@@ -12,12 +11,10 @@ import {
   TrendingDown,
   TrendingUp,
   TriangleAlert,
-  X,
   XCircle,
 } from 'lucide-react'
 import Image from 'next/image'
 import { useParams, useSearchParams } from 'next/navigation'
-import qs from 'query-string'
 import { useState } from 'react'
 
 import { CreateOrUpdateFinancialAccountModal } from '@/components/global/create-or-update-financial-account-modal'
@@ -44,8 +41,6 @@ import { getOverviewDataHttp } from '@/http/balance/get-overview-data'
 import { fetchFinancialAccountsWithDetailsHttp } from '@/http/financial-accounts/fetch-financial-accounts-with-details'
 import { cn } from '@/lib/utils'
 
-import { columns } from './_components/_financial-accounts/columns'
-import { DataTable } from './_components/_financial-accounts/data-table'
 import { AccountActionsDropdown } from './_components/account-actions-dropdown'
 export default function ContasFinanceirasPage() {
   const { 'org-slug': currentOrg } = useParams<{

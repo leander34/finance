@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import { moneyFormatter } from '@saas/core'
 import { HTTPError } from 'ky'
-import { AlertTriangle, Check, EllipsisVertical, Palette } from 'lucide-react'
+import { AlertTriangle, Check, EllipsisVertical } from 'lucide-react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 import { toast } from 'sonner'
@@ -19,14 +19,12 @@ import { CreateOrUpdateFinancialAccountModal } from '@/components/global/create-
 import { CustomInputNumber } from '@/components/global/custom-input-number'
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import {
@@ -45,7 +43,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,

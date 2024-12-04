@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { type FormEvent, useState, useTransition } from 'react'
+import { useState, useTransition } from 'react'
 
 interface FormState {
   success: boolean

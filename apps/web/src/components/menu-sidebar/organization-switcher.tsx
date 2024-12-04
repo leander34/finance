@@ -1,20 +1,10 @@
 'use client'
-import { fakeDelay } from '@saas/core'
 import { useQuery } from '@tanstack/react-query'
-import { CheckIcon, ChevronsUpDown, Loader2, PlusCircle } from 'lucide-react'
+import { CheckIcon, ChevronsUpDown, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import {
   HoverCard,
   HoverCardContent,
@@ -25,7 +15,7 @@ import { getOrganizationsHttp } from '@/http/auth/organization/get-organizations
 import { cn } from '@/lib/utils'
 import { getInitials } from '@/utlis/get-initials'
 
-import { Button, buttonVariants } from '../ui/button'
+import { Button } from '../ui/button'
 import {
   Command,
   CommandEmpty,

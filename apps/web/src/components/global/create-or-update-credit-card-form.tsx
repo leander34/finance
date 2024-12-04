@@ -3,25 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { PopoverPortal } from '@radix-ui/react-popover'
 import * as RadioGroup from '@radix-ui/react-radio-group'
-import { fakeDelay, normalizeWords } from '@saas/core'
+import { normalizeWords } from '@saas/core'
 import { useQuery } from '@tanstack/react-query'
 import { HTTPError } from 'ky'
-import {
-  Check,
-  CheckIcon,
-  ChevronRight,
-  Component,
-  FilePen,
-  HeartCrack,
-  HelpCircle,
-  Loader2,
-  Palette,
-  Pencil,
-  TriangleAlert,
-  Unplug,
-  User,
-  X,
-} from 'lucide-react'
+import { Check, CheckIcon, Loader2, Palette } from 'lucide-react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
@@ -32,7 +17,6 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { CustomInputNumber } from '@/components/global/custom-input-number'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -46,7 +30,6 @@ import { DialogClose } from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -65,12 +48,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
 import {
   createCreditCardHttp,
   type CreateCreditCardHttpRequest,

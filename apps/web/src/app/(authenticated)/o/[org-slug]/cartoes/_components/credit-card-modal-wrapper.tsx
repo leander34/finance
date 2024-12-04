@@ -2,7 +2,6 @@
 import { useState } from 'react'
 
 import { CreateOrUpdateCreditCardModal } from '@/components/global/create-or-update-credit-card-modal'
-import { CreateOrUpdateFinancialAccountModal } from '@/components/global/create-or-update-financial-account-modal'
 import { Button } from '@/components/ui/button'
 
 export function CreditCardModalWrapper() {
