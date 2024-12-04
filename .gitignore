@@ -14,6 +14,7 @@ node_modules
 .env.production
 .env.development
 
+
 # Testing
 coverage
 
@@ -41,3 +42,6 @@ yarn-error.log*
 
 # PM2
 ecosystem.config.js
+
+.logs
+logs
