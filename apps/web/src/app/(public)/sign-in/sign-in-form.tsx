@@ -9,10 +9,10 @@ import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/ui/icons'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { customUseFormState } from '@/hooks/custom-use-form-state'
+import { useCustomFormState } from '@/hooks/use-custom-form-state'
 
 export function SignInForm() {
-  const [formState, handleSubmit, isPending] = customUseFormState(
+  const [formState, handleSubmit, isPending] = useCustomFormState(
     signInWithPasswordAction,
   )
   // console.log(formState)

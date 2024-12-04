@@ -1,5 +1,4 @@
 'use client'
-
 import { type PlanNamesType } from '@saas/core'
 import { AlertTriangle, RocketIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -13,9 +12,9 @@ import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/ui/icons'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { customUseFormState } from '@/hooks/custom-use-form-state'
+import { useCustomFormState } from '@/hooks/use-custom-form-state'
 export function SignUpForm() {
-  const [formState, handleSubmit, isPending] = customUseFormState(
+  const [formState, handleSubmit, isPending] = useCustomFormState(
     signUpWithPasswordAction,
   )
   const searchParams = useSearchParams()
@@ -187,5 +186,3 @@ export function SignUpForm() {
     </div>
   )
 }
-
-// export function SignUpForm2() {}

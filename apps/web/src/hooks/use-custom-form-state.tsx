@@ -13,7 +13,7 @@ const defaultInitialState = {
   message: null,
   errors: null,
 }
-export function customUseFormState(
+export function useCustomFormState(
   action: Action,
   initialState?: FormState,
   onSuccess?: (data: any) => Promise<void> | void,
