@@ -17,7 +17,7 @@ export interface CreateTransactionRequest {
   skip: boolean
   launchType: 'SINGLE_LAUNCH' | 'INSTALLMENT_LAUNCH' | 'RECURRENT_LAUNCH'
   recurrencePeriod:
-    | 'diário'
+    | 'diario'
     | 'semanal'
     | 'quinzenal'
     | 'mensal'

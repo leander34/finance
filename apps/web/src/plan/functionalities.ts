@@ -57,17 +57,17 @@ export const functionalities = [
   },
 ] as const
 
-const a = {
-  FREE: {
-    transactionLimitPerDay: 10,
-    limiteCredtCard: 1,
-    limitebankAccounts: 1,
-    enabledOpenFinance: false,
-    canDoFinancialPlanning: false,
-    canCreateFinancialGoals: false,
-    canUpsertCategories: false,
-    canCreateTags: false,
-    enabledNetworkFriends: false,
-  },
-  PREMIUM: {},
-}
+// const a = {
+//   FREE: {
+//     transactionLimitPerDay: 10,
+//     limiteCredtCard: 1,
+//     limitebankAccounts: 1,
+//     enabledOpenFinance: false,
+//     canDoFinancialPlanning: false,
+//     canCreateFinancialGoals: false,
+//     canUpsertCategories: false,
+//     canCreateTags: false,
+//     enabledNetworkFriends: false,
+//   },
+//   PREMIUM: {},
+// }

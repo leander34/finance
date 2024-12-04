@@ -43,12 +43,13 @@ export function BankBalanceVariantion() {
   const { 'org-slug': currentOrg } = useParams<{
     'org-slug': string
   }>()
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['primary', 'cash-flow-chart', currentOrg],
     queryFn: async () => {
       // await fakeDelay(3000)
       return getCashFlowChartHttp({
         slug: currentOrg,
+        visibledInOverallBalance: true,
       })
     },
   })
@@ -150,7 +151,7 @@ export function AreaVariant() {
   const { 'org-slug': currentOrg } = useParams<{
     'org-slug': string
   }>()
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['primary', 'cash-flow-chart', currentOrg],
     queryFn: async () => {
       // await fakeDelay(3000)

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CaretSortIcon, PlusCircledIcon } from '@radix-ui/react-icons'
-import { dayjs, installmentValue } from '@saas/core'
+import { dayjs } from '@saas/core'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { HTTPError } from 'ky'
 import {
@@ -11,21 +11,19 @@ import {
   CircleDashed,
   Clock,
   FolderUp,
-  HelpCircle,
   Loader2,
   Trash2,
   X,
 } from 'lucide-react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -33,29 +31,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { getRevenueCategoriesHttp } from '@/http/categories/get-revenue-categories'
 import { fetchFinancialAccountsHttp } from '@/http/financial-accounts/fetch-financial-accounts-http'
-import { getAccountsAndCreditCardsHttp } from '@/http/get-accounts-and-credit-cards-http'
 import { createTagHttp } from '@/http/tags/create-tag'
 import { getAllTagsHttp } from '@/http/tags/get-all-tags'
-import { getRevenueTagsHttp } from '@/http/tags/get-revenue-tags'
-import {
-  createTransactionHttp,
-  type CreateTransactionRequest,
-} from '@/http/transactions/create-transaction-http'
 import {
   createTransferHttp,
   type CreateTransferRequest,
 } from '@/http/transactions/create-transfer-http'
 import { queryClient } from '@/lib/react-query'
 import { cn } from '@/lib/utils'
-import { iconMapper } from '@/utlis/icon-mapper'
 
 import { CustomInputNumber } from '../global/custom-input-number'
 import { Badge } from '../ui/badge'
@@ -83,18 +67,8 @@ import { Icons } from '../ui/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Progress } from '../ui/progress'
 import { Separator } from '../ui/separator'
-import { Switch } from '../ui/switch'
 import { Textarea } from '../ui/textarea'
 import { useNewTransaction } from './hook'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPortal,
-  DialogTitle,
-} from './transaction-dialog'
 
 const newTransferFormSchema = z
   .object({
@@ -171,7 +145,7 @@ export function NewTransfer() {
       realizationDate: dayjs().toDate(),
     },
   })
-  const [showModal, setShowModal] = useState(false)
+  const [, setShowModal] = useState(false)
   const [inputTags, setInputTags] = useState('')
   const {
     control,

@@ -1,11 +1,6 @@
 'use server'
 
-import {
-  documentValidator,
-  phoneValidator,
-  PLAN_NAMES,
-  type PlanNamesType,
-} from '@saas/core'
+import { phoneValidator, PLAN_NAMES, type PlanNamesType } from '@saas/core'
 import { env } from '@saas/env'
 import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'

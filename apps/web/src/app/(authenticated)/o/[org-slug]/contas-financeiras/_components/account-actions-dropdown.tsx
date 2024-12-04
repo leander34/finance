@@ -374,7 +374,6 @@ export function ModalEditFinancialAccountBalance({
   })
   const {
     watch,
-    setValue,
     control,
     formState: { isSubmitting },
     handleSubmit,
@@ -455,7 +454,7 @@ export function ModalEditFinancialAccountBalance({
                             onBlur={field.onBlur}
                             getInputRef={field.ref}
                             value={field.value}
-                            disabled={field.disabled}
+                            disabled={field.disabled || isSubmitting}
                             allowNegative={true}
                             // isAllowed={(values) => {
                             //   const { floatValue } = values
@@ -512,6 +511,7 @@ export function ModalEditFinancialAccountBalance({
                           <RadioGroup.Root
                             onValueChange={field.onChange}
                             defaultValue={field.value}
+                            disabled={field.disabled || isSubmitting}
                             className="flex gap-4"
                           >
                             <FormItem className="flex-1 space-y-0">
@@ -595,14 +595,14 @@ export function ModalEditFinancialAccountBalance({
             </div>
             <div className="flex items-start justify-end gap-2 px-6 pb-6">
               <DialogClose asChild>
-                <Button type="button" variant="ghost">
+                <Button type="button" variant="ghost" disabled={isSubmitting}>
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button type="submit">
-                {/* {isSubmitting && (
-                <Icons.spinner className="mr-2 size-4 animate-spin" />
-              )} */}
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting && (
+                  <Icons.spinner className="mr-2 size-4 animate-spin" />
+                )}
                 Salvar
               </Button>
             </div>
