@@ -2,14 +2,20 @@
   "name": "@saas/eslint-config",
   "version": "0.0.0",
   "private": true,
-  "files": ["node.js", "nexy.js", "library.js"],
+  "files": [
+    "node.js",
+    "next.js",
+    "library.js"
+  ],
   "devDependencies": {
-    "@rocketseat/eslint-config": "^2.2.2",
-    "eslint-plugin-simple-import-sort": "^12.1.0",
-    "@saas/prettier": "workspace:*"
+    "@rocketseat/eslint-config": "^2.2.2", 
+    "@saas/prettier": "workspace:*",
+    "eslint-plugin-simple-import-sort": "^12.1.0"
   },
   "prettier": "@saas/prettier",
   "eslintConfig": {
-    "extends": ["./library.js"]
+    "extends": [
+      "./library.js"
+    ]
   }
 }
