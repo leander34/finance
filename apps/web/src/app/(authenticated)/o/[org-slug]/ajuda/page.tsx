@@ -1,3 +1,3 @@
 export default function AjudaPage() {
-  return <div className="h-full">Ajuda</div>
+  return <div className="h-full">Ajudaww</div>
 }
