@@ -1,7 +1,7 @@
-import { BaseError } from './base-error'
+import { BaseError, type ErrorPaths } from './base-error'
 
 export class NotAllowedError extends BaseError {
-  constructor(path: string, language = 'pt-br') {
-    super(`${language}.${path}`, 403, 'Not Allowed Error')
+  constructor(path: ErrorPaths, language = 'pt-br') {
+    super(path, 403, 'Not Allowed Error')
   }
 }

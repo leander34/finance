@@ -153,6 +153,9 @@
             "error-while-trying-to-update-subscription": {
                 "message": "Não foi possível atualizar a assinatura nesse momento, por favor, tente novamente mais tarde."
             }
+        },
+        "internal-server-error": {
+            "message": "Internal Server Error"
         }
     },
     "en": {
