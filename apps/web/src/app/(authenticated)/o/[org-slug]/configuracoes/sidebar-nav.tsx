@@ -1,20 +1,44 @@
 'use client'
+import { CircleUserRound, Ticket } from 'lucide-react'
 import { type LucideIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 import { LinkWithSlug } from '@/components/global/link-with-slug'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-
+const sidebarNavItems = [
+  {
+    title: 'Minha conta',
+    href: '/configuracoes/minha-conta',
+    icon: CircleUserRound,
+  },
+  {
+    title: 'Assinaturas',
+    href: '/configuracoes/assinaturas',
+    icon: Ticket,
+  },
+  // {
+  //   title: 'Notificações',
+  //   href: '/examples/forms/notifications',
+  // },
+  // {
+  //   title: 'Aparência',
+  //   href: '/examples/forms/display',
+  // },
+]
 interface SidebarNavProps extends React.ComponentProps<'nav'> {
-  items: {
+  items?: {
     href: string
     title: string
     icon: LucideIcon
   }[]
 }
 
-export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
+export function SidebarNav({
+  className,
+  items = sidebarNavItems,
+  ...props
+}: SidebarNavProps) {
   const pathname = usePathname()
 
   return (

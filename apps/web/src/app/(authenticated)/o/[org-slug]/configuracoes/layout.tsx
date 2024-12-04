@@ -1,4 +1,3 @@
-import { CircleUserRound, Ticket } from 'lucide-react'
 import { type ReactNode } from 'react'
 
 import { SidebarNav } from './sidebar-nav'
@@ -6,26 +5,7 @@ import { SidebarNav } from './sidebar-nav'
 //   title: 'Forms',
 //   description: 'Advanced form example using react-hook-form and Zod.',
 // }
-const sidebarNavItems = [
-  {
-    title: 'Minha conta',
-    href: '/configuracoes/minha-conta',
-    icon: CircleUserRound,
-  },
-  {
-    title: 'Assinaturas',
-    href: '/configuracoes/assinaturas',
-    icon: Ticket,
-  },
-  // {
-  //   title: 'Notificações',
-  //   href: '/examples/forms/notifications',
-  // },
-  // {
-  //   title: 'Aparência',
-  //   href: '/examples/forms/display',
-  // },
-]
+
 interface LayoutConfiguracaoProps {
   children: ReactNode
 }
@@ -43,7 +23,7 @@ export default function LayoutConfiguracao({
       <Separator className="my-6" /> */}
       <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
         <aside className="lg:w-1/5">
-          <SidebarNav items={sidebarNavItems} />
+          <SidebarNav />
         </aside>
         <div className="flex-1">{children}</div>
       </div>
