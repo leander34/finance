@@ -1,6 +1,6 @@
 'use client'
 
-import { formatPhone4, PLAN_NAMES, type PlanNamesType } from '@saas/core'
+import { type PlanNamesType } from '@saas/core'
 import { AlertTriangle, RocketIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'

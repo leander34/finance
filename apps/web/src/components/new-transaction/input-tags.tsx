@@ -1,5 +1,5 @@
 import { PlusCircledIcon } from '@radix-ui/react-icons'
-import { CheckIcon, Circle, CircleDashed } from 'lucide-react'
+import { CheckIcon, CircleDashed } from 'lucide-react'
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
@@ -13,7 +13,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from '../ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Separator } from '../ui/separator'

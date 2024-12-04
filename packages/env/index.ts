@@ -1,7 +1,12 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 export const env = createEnv({
-  server: {
+  server: {},
+  client: {},
+  shared: {
+    NEXT_PUBLIC_API_URL: z.string().url().default('http://localhost:3333'),
+    NEXT_PUBLIC_URL: z.string().url().default('http://localhost:3000'),
+    JWT_SECRET: z.string().min(20),
     PORT: z.coerce.number().default(3333),
     IPINFO_ACCESS_TOKEN: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().min(1),
@@ -12,13 +17,6 @@ export const env = createEnv({
     NODE_ENV: z
       .union([z.literal('development'), z.literal('production')])
       .default('development'),
-  },
-  client: {
-    NEXT_PUBLIC_API_URL: z.string().url().default('http://localhost:3333'),
-    NEXT_PUBLIC_URL: z.string().url().default('http://localhost:3000'),
-  },
-  shared: {
-    JWT_SECRET: z.string().min(20),
   },
   runtimeEnv: {
     PORT: process.env.PORT,

@@ -1,22 +1,8 @@
 'use client'
-import {
-  ArrowLeft,
-  ArrowRightLeft,
-  ChevronRight,
-  CreditCard,
-  Repeat,
-  TrendingDown,
-  TrendingUp,
-} from 'lucide-react'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { cn } from '@/lib/utils'
-
-import { Separator } from '../ui/separator'
 import { ChooseTransactionType } from './choose-transaction-type'
 import { useNewTransaction } from './hook'
 import { NewExpense } from './new-expense'
@@ -24,17 +10,14 @@ import { NewRevenue } from './new-revenue'
 import { NewTransfer } from './new-transfer'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
 } from './sheet'
 export type PossibleFormTypes = 'despesa' | 'receita' | 'transferencia'
 export function NewTransactionSheet() {
   const searchParams = useSearchParams()
-  const pathname = usePathname()
   const {
     isNewTranscationSheetOpen,
     handleChangeNewTransactionSheet,

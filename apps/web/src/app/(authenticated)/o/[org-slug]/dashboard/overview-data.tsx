@@ -1,5 +1,5 @@
 'use client'
-import { dayjs, fakeDelay, moneyFormatter } from '@saas/core'
+import { dayjs, moneyFormatter } from '@saas/core'
 import { useQuery } from '@tanstack/react-query'
 import {
   Coins,

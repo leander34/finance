@@ -14,7 +14,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
-import { loggerService } from './middlewares/logger'
+// import { loggerService } from './middlewares/logger'
 import { rawBodyPlugin } from './plugins'
 import { authRoutes } from './routes/auth/routes'
 import { balanceRoutes } from './routes/balance/routes'
@@ -81,7 +81,7 @@ export class App {
   }
 
   middlewares() {
-    this._app.register(loggerService)
+    // this._app.register(loggerService)
   }
 
   routes() {

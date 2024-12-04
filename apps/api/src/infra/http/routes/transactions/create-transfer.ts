@@ -10,6 +10,7 @@ import type { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
+import { recurrencePeriodSchema } from '@/@types/recurrence-period'
 import { prisma } from '@/infra/database/prisma'
 import { calcNextRecurrenceDate } from '@/utils/calc-next-recurrence-date'
 import { getAmountRecurrenceRepetition } from '@/utils/get-amount-recurrence-repetition'
@@ -77,17 +78,7 @@ export async function createTransfer(app: FastifyInstance) {
                   z.literal('RECURRENT_LAUNCH'),
                 ])
                 .default('SINGLE_LAUNCH'),
-              recurrencePeriod: z
-                .union([
-                  z.literal('anual'),
-                  z.literal('semestral'),
-                  z.literal('trimestral'),
-                  z.literal('bimestral'),
-                  z.literal('mensal'),
-                  z.literal('quinzenal'),
-                  z.literal('semanal'),
-                  z.literal('diario'),
-                ])
+              recurrencePeriod: recurrencePeriodSchema
                 .default('mensal')
                 .nullish(),
             })

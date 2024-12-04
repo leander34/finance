@@ -2,7 +2,7 @@ import { getCookie } from 'cookies-next'
 import { type CookiesFn } from 'cookies-next/lib/types'
 import ky from 'ky'
 export const api = ky.create({
-  prefixUrl: 'http://localhost:3333',
+  prefixUrl: process.env.NEXT_PUBLIC_API_URL,
   // redirect: 'manual',
   hooks: {
     beforeRequest: [

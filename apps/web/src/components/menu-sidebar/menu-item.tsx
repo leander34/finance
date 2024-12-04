@@ -13,7 +13,6 @@ import {
 import { cn } from '@/lib/utils'
 
 import { LinkWithSlug } from '../global/link-with-slug'
-import { Badge } from '../ui/badge'
 
 interface NavItemProps {
   plan?: string
@@ -33,7 +32,6 @@ export const MenuItem: FC<NavItemProps> = ({
   icon: Icon,
   isCollapsed = false,
   onClick,
-  plan,
   premium = false,
 }) => {
   const [isMounted, setIsMounted] = useState(false)

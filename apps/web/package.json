@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm env:load next dev --turbo",
+    "dev": "pnpm env:load next dev -p 3000 --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "env:load": "dotenv -e ../../.env --"
   },
   "dependencies": {
@@ -81,6 +82,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "dotenv-cli": "^7.4.2",
+    "eslint": "8.57.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

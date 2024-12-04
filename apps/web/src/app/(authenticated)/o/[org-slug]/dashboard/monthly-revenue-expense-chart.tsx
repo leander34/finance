@@ -1,7 +1,7 @@
 'use client'
-import { dayjs, fakeDelay, moneyFormatter } from '@saas/core'
+import { dayjs, moneyFormatter } from '@saas/core'
 import { useQuery } from '@tanstack/react-query'
-import { HelpCircle, Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
@@ -10,7 +10,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
@@ -31,13 +30,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
 import { getMonthlyRevenueExpenseChartHttp } from '@/http/charts/get-monthly-revenue-expense-chart-http'
 import { cn } from '@/lib/utils'
 
@@ -56,7 +48,7 @@ export function MonthlyRevenueExpenseChart() {
     'org-slug': string
   }>()
   const [selectedYear, setSelectedYear] = useState(dayjs().format('YYYY'))
-  const [onlyPaidTransactions, setOnlyPaidTransactions] = useState(false)
+  const [onlyPaidTransactions] = useState(false)
 
   const { data, isLoading } = useQuery({
     queryKey: [

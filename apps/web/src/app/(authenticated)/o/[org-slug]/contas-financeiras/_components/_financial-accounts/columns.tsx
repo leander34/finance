@@ -67,7 +67,7 @@ export const columns: ColumnDef<FinancialAccounts>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
-    cell: ({ row }) => {
+    cell: () => {
       //   const status = statuses.find(
       //     (status) => status.value === row.getValue('status'),
       //   )
@@ -95,7 +95,7 @@ export const columns: ColumnDef<FinancialAccounts>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Priority" />
     ),
-    cell: ({ row }) => {
+    cell: () => {
       //   const priority = priorities.find(
       //     (priority) => priority.value === row.getValue('priority'),
       //   )

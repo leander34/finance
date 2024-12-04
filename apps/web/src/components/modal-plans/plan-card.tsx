@@ -31,7 +31,7 @@ export function PlanCard({
   variant,
 }: PlanCardProps) {
   const [isPending, startTransition] = useTransition()
-  const [state, setState] = useState<{
+  const [, setState] = useState<{
     success: boolean
     message: string | null
     errors: Record<string, string[]> | null

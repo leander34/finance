@@ -4,8 +4,12 @@ on:
       - development
     paths:
       - 'apps/api/**'
-      - 'packages/**'
-      - 'config/**'
+      - 'packages/core/**'
+      - 'packages/auth/**'
+      - 'packages/env/**'
+      - 'config/eslint-config/**'
+      - 'config/prettier/**'
+      - 'config/typescript-config/**'
 jobs:
   deploy-backend:
     name: Deploy Backend Homolog

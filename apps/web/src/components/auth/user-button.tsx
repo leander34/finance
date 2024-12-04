@@ -1,4 +1,4 @@
-import { ChevronDown, Crown, User, UserRound } from 'lucide-react'
+import { Crown } from 'lucide-react'
 
 import { getUserProfileServer } from '@/auth/session-server-only'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'

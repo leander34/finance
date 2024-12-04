@@ -1,64 +1,29 @@
 'use client'
 
-import { dayjs, fakeDelay, moneyFormatter } from '@saas/core'
+import { dayjs, moneyFormatter } from '@saas/core'
 import { useQuery } from '@tanstack/react-query'
 import {
   CirclePlus,
   CreditCard,
   DollarSign,
-  EllipsisVertical,
-  HandCoins,
-  HelpCircle,
   Loader2,
-  Maximize2,
   Receipt,
-  TrendingDown,
-  TrendingUp,
-  TriangleAlert,
-  X,
-  XCircle,
 } from 'lucide-react'
 import Image from 'next/image'
 import { useParams, useSearchParams } from 'next/navigation'
-import qs from 'query-string'
 import { useState } from 'react'
 
 import { CreateOrUpdateCreditCardModal } from '@/components/global/create-or-update-credit-card-modal'
-import { CreateOrUpdateFinancialAccountModal } from '@/components/global/create-or-update-financial-account-modal'
 import { PageContentContainer } from '@/components/global/page-content-container'
-import { DialogHeader } from '@/components/modal-plans/dialog'
-import { useNewTransaction } from '@/components/new-transaction/hook'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { getOverviewDataHttp } from '@/http/balance/get-overview-data'
 import {
   fetchCreditCardsWithDetailsHttp,
   type FetchCreditCardsWithDetailsHttpResponse,
 } from '@/http/credit-cards/fetch-credit-cards-with-details-http'
 import { getCreditCardsOverviewHttp } from '@/http/credit-cards/get-credit-cards-overview'
-import { fetchFinancialAccountsWithDetailsHttp } from '@/http/financial-accounts/fetch-financial-accounts-with-details'
 import { cn } from '@/lib/utils'
 
 import { CreditCardActionsDropdown } from './_components/credit-card-actions-dropdown'
@@ -70,7 +35,7 @@ export default function ContasFinanceirasPage() {
   const { 'org-slug': currentOrg } = useParams<{
     'org-slug': string
   }>()
-  const { handleChangeNewTransactionSheet } = useNewTransaction()
+  // const { handleChangeNewTransactionSheet } = useNewTransaction()
   const [showCreditCardModal, setShowCreditCardModal] = useState(false)
   // const [currentPage, setCurrentPage] = useState(1)
 

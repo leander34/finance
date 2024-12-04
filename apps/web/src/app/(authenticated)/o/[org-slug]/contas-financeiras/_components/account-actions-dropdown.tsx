@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import { moneyFormatter } from '@saas/core'
 import { HTTPError } from 'ky'
-import { AlertTriangle, Check, EllipsisVertical, Palette } from 'lucide-react'
+import { AlertTriangle, Check, EllipsisVertical } from 'lucide-react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 import { toast } from 'sonner'
@@ -19,14 +19,12 @@ import { CreateOrUpdateFinancialAccountModal } from '@/components/global/create-
 import { CustomInputNumber } from '@/components/global/custom-input-number'
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import {
@@ -45,7 +43,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -374,7 +371,6 @@ export function ModalEditFinancialAccountBalance({
   })
   const {
     watch,
-    setValue,
     control,
     formState: { isSubmitting },
     handleSubmit,
@@ -455,7 +451,7 @@ export function ModalEditFinancialAccountBalance({
                             onBlur={field.onBlur}
                             getInputRef={field.ref}
                             value={field.value}
-                            disabled={field.disabled}
+                            disabled={field.disabled || isSubmitting}
                             allowNegative={true}
                             // isAllowed={(values) => {
                             //   const { floatValue } = values
@@ -512,6 +508,7 @@ export function ModalEditFinancialAccountBalance({
                           <RadioGroup.Root
                             onValueChange={field.onChange}
                             defaultValue={field.value}
+                            disabled={field.disabled || isSubmitting}
                             className="flex gap-4"
                           >
                             <FormItem className="flex-1 space-y-0">
@@ -595,14 +592,14 @@ export function ModalEditFinancialAccountBalance({
             </div>
             <div className="flex items-start justify-end gap-2 px-6 pb-6">
               <DialogClose asChild>
-                <Button type="button" variant="ghost">
+                <Button type="button" variant="ghost" disabled={isSubmitting}>
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button type="submit">
-                {/* {isSubmitting && (
-                <Icons.spinner className="mr-2 size-4 animate-spin" />
-              )} */}
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting && (
+                  <Icons.spinner className="mr-2 size-4 animate-spin" />
+                )}
                 Salvar
               </Button>
             </div>
