@@ -1,74 +1,36 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as RadioGroup from '@radix-ui/react-radio-group'
-import { moneyFormatter } from '@saas/core'
-import { HTTPError } from 'ky'
-import { AlertTriangle, Check, EllipsisVertical, Palette } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react'
 import Image from 'next/image'
-import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { type SubmitHandler, useForm } from 'react-hook-form'
-import { NumericFormat } from 'react-number-format'
+import { useState } from 'react'
 import { toast } from 'sonner'
-import { z } from 'zod'
 
 import { archiveCreditCardAction } from '@/actions/credit-cards/archive-credit-card'
 import { deleteCreditCardAction } from '@/actions/credit-cards/delete-credit-card'
 import { unarchiveCreditCardAction } from '@/actions/credit-cards/unarchive-credit-card'
-import { archiveFinancialCreditCardAction } from '@/actions/financial-creditcards/archive-financial-creditcard'
-import { deleteFinancialCreditCardAction } from '@/actions/financial-creditcards/delete-financial-creditcard'
-import { editFinancialCreditCardVisibilityAction } from '@/actions/financial-creditcards/edit-financial-creditcard-visibility'
-import { unarchiveFinancialCreditCardAction } from '@/actions/financial-creditcards/unarchive-financial-creditcard'
 import { deletePaymentsFromACreditCardInvoiceAction } from '@/actions/invoices/delete-payments-from-a-credit-card-invoice'
 import { CreateOrUpdateCreditCardModal } from '@/components/global/create-or-update-credit-card-modal'
-import { CustomInputNumber } from '@/components/global/custom-input-number'
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
 import { Icons } from '@/components/ui/icons'
-import { Input } from '@/components/ui/input'
 import { useCustomTransition } from '@/hooks/use-custom-transition'
 import type { FetchCreditCardsWithDetailsHttpResponse } from '@/http/credit-cards/fetch-credit-cards-with-details-http'
 import { queryClient } from '@/lib/react-query'
-import { cn } from '@/lib/utils'
 
 import { InvoicePaymentModal } from './invoice-payment-modal'
 interface CreditCardActionsDropdownProps {

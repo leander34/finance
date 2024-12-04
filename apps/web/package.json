@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm env:load next dev --turbo",
+    "dev": "pnpm env:load next dev -p 3000 --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "env:load": "dotenv -e ../../.env --"
   },
   "dependencies": {

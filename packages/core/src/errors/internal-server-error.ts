@@ -1,8 +1,12 @@
-import { BaseError } from './base-error'
+import { BaseError, type ErrorPaths } from './base-error'
 
 export class InternalServerError extends BaseError {
   constructor(err: Error, language = 'pt-br') {
-    super(`${language}.internal-server-error`, 500, 'Internal Server Error')
+    super(
+      `${language}.internal-server-error` as ErrorPaths,
+      500,
+      'Internal Server Error',
+    )
 
     console.log({
       name: err.name,

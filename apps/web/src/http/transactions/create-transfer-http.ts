@@ -10,7 +10,7 @@ export interface CreateTransferRequest {
   realizationDate: string
   launchType: 'SINGLE_LAUNCH' | 'RECURRENT_LAUNCH'
   recurrencePeriod:
-    | 'diário'
+    | 'diario'
     | 'semanal'
     | 'quinzenal'
     | 'mensal'

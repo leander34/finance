@@ -1,6 +1,5 @@
 'use client'
 import { BarChartBig, Handshake, Palette, Search, Users2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -13,10 +12,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { useCookies } from '@/hooks/use-cookies'
 export const SearchButton = () => {
-  const { orgSlug } = useCookies()
-  const router = useRouter()
   const [open, setOpen] = useState(false)
   useEffect(() => {
     const down = (e: KeyboardEvent) => {

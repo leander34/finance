@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CaretSortIcon, PlusCircledIcon } from '@radix-ui/react-icons'
-import { dayjs, fakeDelay, installmentValue } from '@saas/core'
+import { dayjs, installmentValue } from '@saas/core'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { HTTPError } from 'ky'
 import {
@@ -11,10 +11,8 @@ import {
   CircleDashed,
   Clock,
   FolderUp,
-  HeartCrack,
   HelpCircle,
   Loader2,
-  type LucideIcon,
   Trash2,
   X,
 } from 'lucide-react'
@@ -41,12 +39,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { api } from '@/http/api-client'
 import { getExpenseCategoriesHttp } from '@/http/categories/get-expense-categories'
 import { getAccountsAndCreditCardsHttp } from '@/http/get-accounts-and-credit-cards-http'
 import { createTagHttp } from '@/http/tags/create-tag'
 import { getAllTagsHttp } from '@/http/tags/get-all-tags'
-import { getExpenseTagsHttp } from '@/http/tags/get-expense-tags'
 import {
   createTransactionHttp,
   type CreateTransactionRequest,
@@ -80,21 +76,10 @@ import {
 import { Icons } from '../ui/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Progress } from '../ui/progress'
-import { ScrollArea } from '../ui/scroll-area'
 import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
 import { Textarea } from '../ui/textarea'
 import { useNewTransaction } from './hook'
-import type { PossibleFormTypes } from './new-transaction-sheet'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPortal,
-  DialogTitle,
-} from './transaction-dialog'
 
 const newExpenseFormSchema = z
   .object({
@@ -216,7 +201,7 @@ export function NewExpense() {
       realizationDate: dayjs().toDate(),
     },
   })
-  const [showModal, setShowModal] = useState(false)
+  const [, setShowModal] = useState(false)
   const [inputTags, setInputTags] = useState('')
   const {
     control,
@@ -225,7 +210,6 @@ export function NewExpense() {
     watch,
     setValue,
     getValues,
-    trigger,
   } = form
   const [showMore, setShowMore] = useState(false)
   const refContainer = useRef<HTMLDivElement>(null)
@@ -259,11 +243,7 @@ export function NewExpense() {
     enabled: !!currentOrg,
   })
 
-  const {
-    data: tagsData,
-    isLoading: isLoadingTags,
-    refetch,
-  } = useQuery({
+  const { data: tagsData, isLoading: isLoadingTags } = useQuery({
     queryKey: ['secondary', 'tags', currentOrg],
     queryFn: async () => {
       return getAllTagsHttp(currentOrg)

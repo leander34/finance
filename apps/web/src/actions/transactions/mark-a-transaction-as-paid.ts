@@ -1,5 +1,4 @@
 'use server'
-import { fakeDelay } from '@saas/core'
 import { HTTPError } from 'ky'
 
 import {
@@ -15,6 +14,8 @@ export async function markATransactionAsPaidAction(transactionId: string) {
     await markATransactionAsPaidHttp({
       slug: currentOrg!,
       transactionId,
+      amount: 100,
+      realizationDate: '',
     })
     // await fakeDelay(3000)
     return {
